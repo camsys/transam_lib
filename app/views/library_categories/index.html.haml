@@ -1,0 +1,14 @@
+.col-sm-12.col-md-10.col-md-offset-1.col-lg-8.col-lg-offset-2
+  .page-header
+    %h2 Document Library
+
+  .row
+    .col-sm-12
+      = render 'search_form'
+
+  .row
+    .col-sm-12
+      - if @categories.empty?
+        %p No matching documents found
+      - else
+        = render :partial => 'index_table', :locals => {:categories => @categories}

@@ -1,0 +1,20 @@
+:ruby
+  library = LibraryCategory.active.all
+
+%li.dropdown{:class => get_nav_link_class(['library'])}
+  = link_to "#", :class => "dropdown-toggle", :data => {"toggle" => "dropdown"} do
+    %i.fa.fa-book.fa-2x
+    %b.caret
+  %ul.dropdown-menu
+    %li.text-left
+      = link_to library_categories_path do
+        %i.fa.fa-book.fa-fw
+        = " Document Library"
+
+    - if library.present?
+      %li.divider
+      - library.each do |category|
+        %li
+          = link_to library_category_path(category) do
+            %i.fa.fa-book.fa-fw
+            = category.name

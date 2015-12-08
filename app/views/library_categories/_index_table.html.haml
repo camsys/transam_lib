@@ -1,0 +1,51 @@
+:css
+  .document-row+.document-row {
+    margin-top: 50px;
+  }
+
+.row{:style => 'margin-top: 50px;'}
+  - categories.each do |category|
+    .col-sm-12.document-row
+      %fieldset
+        %legend= category
+        .table-responsive
+          %table.table.table-hover#sign_standards_datatable{:data => {:toggle => 'table',
+            :card_view => "false",
+            :pagination => 'false',
+            :search => 'false',
+            :show_columns => 'false',
+            :show_toggle => 'false'}}
+            %thead
+              %tr
+                %th.center Type
+                %th.center Document
+                %th.center Description
+                %th.center Last Updated
+                %th.center Actions
+            %tbody
+              - category.library_documents.each do |doc|
+                %tr
+                  %td.nowrap= get_file_icon_for_filename(doc.filename)
+                  %td.nowrap
+                    = link_to doc.name, library_category_library_document_path(category, doc)
+                  %td.left= format_as_text(doc.description)
+                  %td.right.nowrap= format_as_date(doc.updated_at)
+                  %td.center
+                    - if can? :read, doc
+                      = link_to download_document_path(doc), :class => "btn btn-primary btn-xs pull-right", :style => "margin-left: 5px;" do
+                        %i.fa.fa-download
+                        Download
+                    - if can? :update, doc
+                      = link_to d, edit_document_path(doc), :class => "btn btn-success btn-xs pull-right", :style => "margin-left: 5px;", :data => { :confirm => 'Are you sure you want to remove this document?' } do
+                        %i.fa.fa-edit
+                        Edit
+                    - if can? :destroy, doc
+                      = link_to d, :method => :delete, :class => "btn btn-warning btn-xs pull-right", :style => "margin-left: 5px;", :data => { :confirm => 'Are you sure you want to remove this document?' } do
+                        %i.fa.fa-trash
+                        Delete
+
+:javascript
+
+  $(document).ready(function() {
+
+  });
