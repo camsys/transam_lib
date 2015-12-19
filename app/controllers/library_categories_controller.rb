@@ -7,7 +7,7 @@ class LibraryCategoriesController < OrganizationAwareController
   INDEX_KEY_LIST_VAR        = "library_key_list_cache_var"
 
   add_breadcrumb "Home", :root_path
-  add_breadcrumb "Library", :library_library_categories_path
+  add_breadcrumb "Document Library", :library_categories_path
 
   before_action :set_category, only: [:show, :edit, :update, :destroy, :load_view]
 
@@ -60,8 +60,8 @@ class LibraryCategoriesController < OrganizationAwareController
 
     # get the @prev_record_path and @next_record_path view vars
     get_next_and_prev_object_keys(@category, INDEX_KEY_LIST_VAR)
-    @prev_record_path = @prev_record_key.nil? ? "#" : library_library_category_path(@prev_record_key)
-    @next_record_path = @next_record_key.nil? ? "#" : library_library_category_path(@next_record_key)
+    @prev_record_path = @prev_record_key.nil? ? "#" : library_category_path(@prev_record_key)
+    @next_record_path = @next_record_key.nil? ? "#" : library_category_path(@next_record_key)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -85,7 +85,7 @@ class LibraryCategoriesController < OrganizationAwareController
   #-----------------------------------------------------------------------------
   def edit
 
-    add_breadcrumb @category.name, library_library_category_path(@category)
+    add_breadcrumb @category.name, library_category_path(@category)
     add_breadcrumb "Modify"
 
   end
@@ -103,7 +103,7 @@ class LibraryCategoriesController < OrganizationAwareController
     respond_to do |format|
       if @category.save
         notify_user(:notice, "Library category #{@category} was successfully created.")
-        format.html { redirect_to library_library_category_path(@category) }
+        format.html { redirect_to library_category_path(@category) }
         format.json { render :json => @category, :status => :created, :location => @category }
       else
         format.html { render :action => "new" }
@@ -117,13 +117,13 @@ class LibraryCategoriesController < OrganizationAwareController
   #-----------------------------------------------------------------------------
   def update
 
-    add_breadcrumb @category.name, library_library_category_path(@category)
+    add_breadcrumb @category.name, library_category_path(@category)
     add_breadcrumb "Modify"
 
     respond_to do |format|
       if @category.update_attributes(form_params)
         notify_user(:notice, "Library category #{@category.name} was successfully updated.")
-        format.html { redirect_to library_library_category_path(@category) }
+        format.html { redirect_to library_category_path(@category) }
         format.json { head :no_content }
       else
         format.html { render :action => "edit" }
@@ -145,7 +145,7 @@ class LibraryCategoriesController < OrganizationAwareController
         if params[:view] == "back"
           redirect_to :back
         else
-          redirect_to library_library_categories_path
+          redirect_to ibrary_categories_path
         end
       }
       format.json { head :no_content }

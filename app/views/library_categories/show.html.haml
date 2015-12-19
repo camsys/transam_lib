@@ -1,0 +1,8 @@
+.row
+  .col-sm-12.col-md-10.col-md-offset-1.col-lg-8.col-lg-offset-2
+    .page-header
+      %h2= @category
+
+.row
+  .col-sm-12.col-md-10.col-md-offset-1.col-lg-8.col-lg-offset-2
+    = render :partial => 'category_documents', :locals => {:category => @category}
