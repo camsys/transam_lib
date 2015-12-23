@@ -145,7 +145,7 @@ class LibraryCategoriesController < OrganizationAwareController
         if params[:view] == "back"
           redirect_to :back
         else
-          redirect_to ibrary_categories_path
+          redirect_to library_categories_path
         end
       }
       format.json { head :no_content }
