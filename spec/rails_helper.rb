@@ -21,6 +21,10 @@ ActiveRecord::Migration.maintain_test_schema!
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
   config.include Devise::TestHelpers, :type => :controller
+
+  config.color = true                  # Use color in STDOUT
+  config.tty = true                    # Use color not only in STDOUT but also in pagers and files
+  config.formatter = :documentation    # Use the specified formatter
 end
 
 module TransamMapMarkers; end
