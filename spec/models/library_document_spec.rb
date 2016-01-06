@@ -6,10 +6,10 @@ RSpec.describe LibraryDocument, :type => :model do
 
   describe 'associations' do
     it 'must have an org' do
-      expect(LibraryDocument.column_names).to include('organization_id')
+      expect(test_doc).to belong_to(:organization)
     end
     it 'must have a category' do
-      expect(LibraryDocument.column_names).to include('library_category_id')
+      expect(test_doc).to belong_to(:library_category)
     end
   end
   describe 'validations' do

@@ -6,7 +6,7 @@ RSpec.describe LibraryCategory, :type => :model do
 
   describe 'associations' do
     it 'has an org' do
-      expect(LibraryCategory.column_names).to include('organization_id')
+      expect(test_category).to belong_to(:organization)
     end
   end
 
