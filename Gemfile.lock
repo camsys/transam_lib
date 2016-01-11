@@ -301,6 +301,8 @@ GEM
     ruby_parser (3.7.2)
       sexp_processor (~> 4.1)
     sexp_processor (4.6.0)
+    shoulda-matchers (3.1.0)
+      activesupport (>= 4.0.0)
     signed_multiset (0.2.1)
     simple_form (3.2.1)
       actionpack (> 4, < 5.1)
@@ -338,8 +340,9 @@ DEPENDENCIES
   factory_girl_rails
   mysql2
   rspec-rails
+  shoulda-matchers
   transam_core!
   transam_lib!
 
 BUNDLED WITH
-   1.10.4
+   1.10.6
