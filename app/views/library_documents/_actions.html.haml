@@ -1,0 +1,21 @@
+.btn-group.pull-right.panel-action
+  %button.btn.btn-primary.btn-sm.dropdown-toggle{:data => {:toggle => 'dropdown'}}
+    %i.fa.fa-cog
+    = " Actions"
+    %span.caret
+  %ul.dropdown-menu{:role => 'menu'}
+    %li
+      = link_to download_library_category_library_document_path(@document.library_category, @document) do
+        %i.fa.fa-edit.fa-fw
+        = " Download this document"
+    - if can? :update, @document
+      %li
+        = link_to edit_library_category_library_document_path(@document.library_category, @document) do
+          %i.fa.fa-edit.fa-fw
+          = " Update this document"
+    - if can? :delete, @document
+      %li.divider
+      %li
+        = link_to library_category_library_document_path(@document.library_category, @document), :method => :delete, :data => {:confirm => "Are you sure you want to remove this document? The action can't be undone."} do
+          %i.fa.fa-trash-o.fa-fw
+          = " Remove this document"

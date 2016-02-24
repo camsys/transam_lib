@@ -1,0 +1,18 @@
+%ul.nav.nav-tabs
+  %li
+    %a{:href => "#comments", :data =>{:toggle => 'tab'}}
+      %span.badge.pull-right=  @document.comments.count
+      = "Comments"
+  %li
+    %a{:href => "#documents", :data =>{:toggle => 'tab'}}
+      %span.badge.pull-right=  @document.documents.count
+      = "Supporting Documentation"
+
+.tab-content
+  .tab-pane.fade#comments
+    .tab-content
+      = render 'comments'
+
+  .tab-pane.fade#documents
+    .tab-content
+      = render 'documents'

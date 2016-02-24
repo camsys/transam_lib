@@ -20,6 +20,7 @@ class LibraryDocument < ActiveRecord::Base
   # Callbacks
   #-----------------------------------------------------------------------------
   after_initialize  :set_defaults
+  before_save       :update_file_attributes
 
   #-----------------------------------------------------------------------------
   # Associations
@@ -29,8 +30,13 @@ class LibraryDocument < ActiveRecord::Base
   # Every document must belong to a category
   belongs_to :library_category
 
+  belongs_to :creator, :class_name => "User", :foreign_key => "created_by_id"
+
   # Has 0 or more comments. Using a polymorphic association, These will be removed if the project is removed
   has_many    :comments,    :as => :commentable,  :dependent => :destroy
+
+  # Has 0 or more documents. Using a polymorphic association, These will be removed if the project is removed
+  has_many    :documents,    :as => :documentable,  :dependent => :destroy
 
   # uploader
   mount_uploader :file, LibraryUploader
@@ -41,7 +47,7 @@ class LibraryDocument < ActiveRecord::Base
   validates :name,                  :presence => true
   validates :description,           :presence => true
   validates :organization_id,       :presence => true
-  validates :user_id,               :presence => true
+  validates :creator,               :presence => true
   validates :file,                  :presence => true, :file_size => { :maximum => MAX_UPLOAD_FILE_SIZE.megabytes.to_i }
   validates :original_filename,     :presence => true
 
@@ -53,8 +59,6 @@ class LibraryDocument < ActiveRecord::Base
 
   # List of hash parameters allowed by the controller
   FORM_PARAMS = [
-    :organization_id,
-    :library_category_id,
     :name,
     :description,
     :file,
@@ -82,6 +86,21 @@ class LibraryDocument < ActiveRecord::Base
 
   # Set resonable defaults for a new vehicle
   def set_defaults
+  end
+
+  #-----------------------------------------------------------------------------
+  #
+  # Private Methods
+  #
+  #-----------------------------------------------------------------------------
+  private
+
+  def update_file_attributes
+
+    if file.present? && file_changed?
+      self.content_type = file.file.content_type
+      self.file_size = file.file.size
+    end
   end
 
 end

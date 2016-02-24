@@ -22,6 +22,7 @@ class LibraryCategoriesController < OrganizationAwareController
 
     # Check to see if we got an organization to sub select on.
     @org_filter = params[:org_filter]
+
     conditions << 'organization_id IN (?)'
     if @org_filter.blank?
       values << @organization_list
@@ -31,8 +32,16 @@ class LibraryCategoriesController < OrganizationAwareController
 
     @library_category_id = params[:library_category_id]
     unless @library_category_id.blank?
-      conditions << 'library_category_id = ?'
+      conditions << 'id = ?'
       values << @library_category_id
+    end
+
+    @search_text = params[:search_text]
+    unless @search_text.blank?
+      conditions << '(name LIKE ? OR description LIKE ?)'
+      query_str = @search_text + '%'
+      values << query_str
+      values << query_str
     end
 
     #puts conditions.inspect

@@ -7,8 +7,9 @@ Rails.application.routes.draw do
     resources :library_categories do
 
       resources :library_documents do
-        resources :comments
-        resources :documents
+        member do
+          get 'download'
+        end
       end
 
     end
