@@ -50,7 +50,7 @@ class LibraryDocumentsController < OrganizationAwareController
     respond_to do |format|
       if @document.update(document_params)
         notify_user(:notice, 'Document was successfully updated.')
-        format.html { redirect_to get_resource_url(@documentable) }
+        format.html { redirect_to library_category_library_document_path(@category, @document) }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
