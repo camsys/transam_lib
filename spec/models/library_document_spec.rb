@@ -28,13 +28,14 @@ RSpec.describe LibraryDocument, :type => :model do
 
       expect(test_doc.valid?).to be false
     end
-    it 'must have a user' do
-      test_doc.user = nil
+    it 'must have a creator' do
+      test_doc.creator = nil
 
       expect(test_doc.valid?).to be false
     end
     it 'must have a file' do
-      test_doc.file = nil
+      test_doc = build_stubbed(:library_document, :file => nil)
+      expect(test_doc.valid?).to be false
 
       expect(test_doc.valid?).to be false
     end
@@ -47,8 +48,6 @@ RSpec.describe LibraryDocument, :type => :model do
 
   it '#allowable_params' do
     expect(LibraryDocument.allowable_params).to eq([
-      :organization_id,
-      :library_category_id,
       :name,
       :description,
       :file,
