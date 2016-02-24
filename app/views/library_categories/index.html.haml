@@ -16,6 +16,6 @@
   .row
     .col-sm-12
       - if @categories.empty?
-        %p No matching categories found
+        %p No matching documents found
       - else
         = render :partial => 'index_table', :locals => {:categories => @categories}
