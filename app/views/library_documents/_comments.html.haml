@@ -14,5 +14,15 @@
         :url => library_document_comments_path(@document, Comment.new),
         :role => 'form' do |f|
           .form-group
-            = f.text_area :comment, :class => 'form-control', :placeholder => 'Enter a new comment...', :required => true, :minlength => 10, :maxlength => 254
+            = f.text_area :comment, :class => 'form-control comment_form', :placeholder => 'Enter a new comment...', :required => true, :minlength => 10, :maxlength => 254
           = f.submit :class => 'btn btn-primary', :id => 'comment_submit'
+
+:javascript
+
+  // jquery validations
+  $('.comment_form').validate({
+    ignore: [], //validate hidden fields
+    submitHandler: function(form) {
+      form.submit();
+    }
+  });

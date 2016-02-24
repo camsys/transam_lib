@@ -1,6 +1,6 @@
 
 = simple_form_for([@category, @document],
-    :html => {:multipart => true, :class => 'form-vertical' },
+    :html => {:multipart => true, :class => 'form-vertical library_document_form' },
     :wrapper => :vertical_form,
     :wrapper_mappings => {:check_boxes => :vertical_radio_and_checkboxes, :radio_buttons => :vertical_radio_and_checkboxes, :file => :vertical_file_input, :boolean => :vertical_boolean}) do |f|
   = f.input :name, :required => true
@@ -8,3 +8,13 @@
   = f.input :file, :required => true
 
   = f.button :submit, :class => "btn btn-primary"
+
+:javascript
+
+  // jquery validations
+  $('.library_document_form').validate({
+    ignore: [], //validate hidden fields
+    submitHandler: function(form) {
+      form.submit();
+    }
+  });
