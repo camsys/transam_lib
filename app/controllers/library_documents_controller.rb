@@ -1,5 +1,8 @@
 class LibraryDocumentsController < OrganizationAwareController
 
+  add_breadcrumb "Home", :root_path
+  add_breadcrumb "Document Library", :library_categories_path
+
   before_action :set_category
   before_action :set_document, :only => [:show, :edit, :update, :destroy, :download]
 
@@ -8,13 +11,18 @@ class LibraryDocumentsController < OrganizationAwareController
   end
 
   def show
+    add_breadcrumb @document.name, library_category_library_document_path(@category, @document)
   end
 
   def new
+    add_breadcrumb "New", new_library_category_library_document_path(@category)
+
     @document = LibraryDocument.new
   end
 
   def edit
+    add_breadcrumb @document.name, library_category_library_document_path(@category, @document)
+    add_breadcrumb "Modify"
   end
 
   def download
@@ -27,6 +35,8 @@ class LibraryDocumentsController < OrganizationAwareController
   end
 
   def create
+    add_breadcrumb "New", new_library_category_library_document_path(@category)
+
     @document = @category.library_documents.build(document_params)
     @document.organization = @organization
     @document.creator = current_user
@@ -46,6 +56,8 @@ class LibraryDocumentsController < OrganizationAwareController
   # PATCH/PUT /documents/1
   # PATCH/PUT /documents/1.json
   def update
+    add_breadcrumb @document.name, library_category_library_document_path(@category, @document)
+    add_breadcrumb "Modify"
 
     respond_to do |format|
       if @document.update(document_params)
@@ -77,6 +89,8 @@ class LibraryDocumentsController < OrganizationAwareController
   # Use callbacks to share common setup or constraints between actions.
   def set_category
     @category = LibraryCategory.find_by(:object_key => params[:library_category_id])
+
+    add_breadcrumb @category.name, library_category_path(@category)
   end
 
   # Use callbacks to share common setup or constraints between actions.
