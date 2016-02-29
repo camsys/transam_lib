@@ -57,6 +57,11 @@ class LibraryCategory < ActiveRecord::Base
     name
   end
 
+  # Returns true if category can be deleted
+  def deleteable?
+    library_documents.empty?
+  end
+
   #-----------------------------------------------------------------------------
   # Protected Methods
   #-----------------------------------------------------------------------------

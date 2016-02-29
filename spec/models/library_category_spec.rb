@@ -29,10 +29,21 @@ RSpec.describe LibraryCategory, :type => :model do
   end
 
   it '#allowable_params' do
-
+    expect(LibraryCategory.allowable_params).to eq([
+      :organization_id,
+      :name,
+      :description,
+      :active
+    ])
   end
 
   it '.to_s' do
     expect(test_category.to_s).to eq(test_category.name)
+  end
+
+  it '.deleteable?' do
+    expect(test_category.deleteable?).to be true
+    create(:library_document, :library_category => test_category)
+    expect(test_category.deleteable?).to be false
   end
 end
