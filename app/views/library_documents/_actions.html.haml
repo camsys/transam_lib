@@ -13,7 +13,7 @@
         = link_to edit_library_category_library_document_path(@document.library_category, @document) do
           %i.fa.fa-edit.fa-fw
           = " Update this document"
-    - if can? :delete, @document
+    - if can? :destroy, @document
       %li.divider
       %li
         = link_to library_category_library_document_path(@document.library_category, @document), :method => :delete, :data => {:confirm => "Are you sure you want to remove this document? The action can't be undone."} do
