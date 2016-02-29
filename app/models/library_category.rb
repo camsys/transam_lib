@@ -37,6 +37,7 @@ class LibraryCategory < ActiveRecord::Base
   scope :active, -> { where(:active => true) }
 
   FORM_PARAMS = [
+    :organization_id,
     :name,
     :description,
     :active

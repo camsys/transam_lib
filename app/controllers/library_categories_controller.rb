@@ -107,7 +107,9 @@ class LibraryCategoriesController < OrganizationAwareController
     add_breadcrumb "New", new_library_category_path
 
     @category = LibraryCategory.new(form_params)
-    @category.organization = @organization
+    if @category.organization.nil?
+      @category.organization = @organization
+    end
 
     respond_to do |format|
       if @category.save

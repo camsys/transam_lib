@@ -44,7 +44,6 @@ RSpec.describe LibraryDocumentsController, :type => :controller do
   end
 
   it 'POST create' do
-    request.env["HTTP_REFERER"] = root_path
     post :create, :library_category_id => test_category.object_key, :library_document => attributes_for(:library_document, :description => 'new description 222')
     test_category.reload
 

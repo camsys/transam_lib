@@ -38,13 +38,14 @@ class LibraryDocumentsController < OrganizationAwareController
     add_breadcrumb "New", new_library_category_library_document_path(@category)
 
     @document = @category.library_documents.build(document_params)
-    @document.organization = @organization
+
+    @document.organization = @category.organization
     @document.creator = current_user
 
     respond_to do |format|
       if @document.save
         notify_user(:notice, 'Document was successfully created.')
-        format.html { redirect_to :back }
+        format.html { redirect_to library_category_library_document_path(@category, @document) }
         format.json { render action: 'show', status: :created, location: @document }
       else
         format.html { render action: 'new' }
