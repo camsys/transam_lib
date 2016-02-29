@@ -4,6 +4,9 @@
 #-----------------------------------------------------------------------------
 class LibraryCategoriesController < OrganizationAwareController
 
+  load_resource :find_by => :object_key
+  authorize_resource
+
   INDEX_KEY_LIST_VAR        = "library_key_list_cache_var"
 
   add_breadcrumb "Home", :root_path
