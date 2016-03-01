@@ -1,6 +1,5 @@
 class LibraryDocumentsController < OrganizationAwareController
 
-  load_resource :find_by => :object_key
   authorize_resource
 
   add_breadcrumb "Home", :root_path
