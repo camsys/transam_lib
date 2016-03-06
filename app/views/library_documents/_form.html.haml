@@ -6,7 +6,7 @@
   = f.input :description, :as => :text, :required => true, :input_html => { :rows => 3 }, :placeholder => 'Enter a brief description of the document...'
 
   - if @document.new_record?
-    = f.input :file, :required => true, :title => @document.file? ? @document.original_filename : nil, :input_html => { :extension => "pdf|xls|xlsx|doc|docx|ppt" }
+    = f.input :file, :required => true, :title => @document.file? ? @document.original_filename : nil, :input_html => { :extension => "pdf,xls,xlsx,doc,docx,ppt" }
   -else
     = dialog_tag("File", {:icon => "fa fa-info-circle", :class => "form_part"}) do
       %p= @document.original_filename
@@ -14,6 +14,10 @@
   = f.button :submit, :class => "btn btn-primary"
 
 :javascript
+
+  $.extend(jQuery.validator.messages, {
+      extension: "Please attach a file with a valid extension {0}."
+  });
 
   // jquery validations
   $('.library_document_form').validate({
