@@ -11,7 +11,7 @@
       %fieldset
         %legend Add Comment
         = form_for [@document, Comment.new],
-        :html => {:multipart => true, :class => 'form-vertical comment_form' }
+        :html => {:multipart => true, :class => 'form-vertical comment_form' },
         :url => library_document_comments_path(@document, Comment.new),
         :role => 'form' do |f|
           .form-group
