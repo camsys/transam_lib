@@ -1,19 +1,26 @@
-= simple_form_for([@category, @document],
-    :html => {:multipart => true, :class => 'form-vertical library_document_form' },
-    :wrapper => :vertical_form,
-    :wrapper_mappings => {:check_boxes => :vertical_radio_and_checkboxes, :radio_buttons => :vertical_radio_and_checkboxes, :file => :vertical_file_input, :boolean => :vertical_boolean}) do |f|
-  = f.input :name, :required => true
-  = f.input :description, :as => :text, :required => true, :input_html => { :rows => 3 }, :placeholder => 'Enter a brief description of the document...'
+#processing
+  = render :partial => 'shared/running_process', :locals => {:message => "Saving. This process might take a while."}
+#form
+  = simple_form_for([@category, @document],
+      :html => {:multipart => true, :class => 'form-vertical library_document_form' },
+      :wrapper => :vertical_form,
+      :wrapper_mappings => {:check_boxes => :vertical_radio_and_checkboxes, :radio_buttons => :vertical_radio_and_checkboxes, :file => :vertical_file_input, :boolean => :vertical_boolean}) do |f|
+    = f.input :name, :required => true
+    = f.input :description, :as => :text, :required => true, :input_html => { :rows => 3 }, :placeholder => 'Enter a brief description of the document...'
 
-  - if @document.new_record?
-    = f.input :file, :required => true, :title => @document.file? ? @document.original_filename : nil, :input_html => { :extension => "pdf,xls,xlsx,doc,docx,ppt" }
-  -else
-    = dialog_tag("File", {:icon => "fa fa-info-circle", :class => "form_part"}) do
-      %p= @document.original_filename
+    - if @document.new_record?
+      = f.input :file, :required => true, :title => @document.file? ? @document.original_filename : nil, :input_html => { :extension => "pdf,xls,xlsx,doc,docx,ppt" }
+    -else
+      = dialog_tag("File", {:icon => "fa fa-info-circle", :class => "form_part"}) do
+        %p= @document.original_filename
 
-  = f.button :submit, :class => "btn btn-primary"
+    = f.button :submit, :class => "btn btn-primary"
 
 :javascript
+
+  // Hide the processing div and show the form
+  $('#processing').hide();
+  $('#form').show();
 
   $.extend(jQuery.validator.messages, {
       extension: "Please attach a file with a valid extension {0}."
@@ -23,6 +30,8 @@
   $('.library_document_form').validate({
     ignore: [], //validate hidden fields
     submitHandler: function(form) {
+      $('#processing').show();
+      $('#form').hide();
       form.submit();
     }
   });
