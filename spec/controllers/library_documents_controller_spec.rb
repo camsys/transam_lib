@@ -2,13 +2,6 @@ require 'rails_helper'
 
 RSpec.describe LibraryDocumentsController, :type => :controller do
 
-  class TestOrg < Organization
-    def get_policy
-      return Policy.where("`organization_id` = ?",self.id).order('created_at').last
-    end
-  end
-
-
   let(:test_category) { create(:library_category) }
   let(:test_doc) { create(:library_document, :library_category => test_category) }
 
