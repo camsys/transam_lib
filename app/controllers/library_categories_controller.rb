@@ -4,7 +4,7 @@
 #-----------------------------------------------------------------------------
 class LibraryCategoriesController < OrganizationAwareController
 
-  authorize_resource
+  authorize_resource :except => [:destroy]
 
   INDEX_KEY_LIST_VAR        = "library_key_list_cache_var"
 
@@ -150,17 +150,12 @@ class LibraryCategoriesController < OrganizationAwareController
   #-----------------------------------------------------------------------------
   def destroy
 
+    authorize! :destroy, @category
+
     @category.destroy
-    notify_user(:notice, "Capital Project was successfully removed.")
+    notify_user(:notice, "Library Category was successfully removed.")
     respond_to do |format|
-      format.html {
-        # See if we got a view to render
-        if params[:view] == "back"
-          redirect_to :back
-        else
-          redirect_to library_categories_path
-        end
-      }
+      format.html { redirect_to library_categories_path }
       format.json { head :no_content }
     end
   end
