@@ -22,7 +22,7 @@ class LibraryCategory < ActiveRecord::Base
   belongs_to  :organization
 
   # Every category has 0 or more documents
-  has_many    :library_documents
+  has_many    :library_documents, :dependent => :destroy
 
   #------------------------------------------------------------------------------
   # Validations
