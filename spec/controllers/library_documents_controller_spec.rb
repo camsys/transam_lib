@@ -9,13 +9,6 @@ RSpec.describe LibraryDocumentsController, :type => :controller do
     sign_in create(:admin)
   end
 
-  it 'GET index' do
-    test_doc.save!
-    get :index, :library_category_id => test_category.object_key
-
-    expect(assigns(:category)).to eq(test_category)
-    expect(assigns(:documents)).to eq(test_category.library_documents)
-  end
   it 'GET show' do
     get :show, :library_category_id => test_category.object_key, :id => test_doc.object_key
 
