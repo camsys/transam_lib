@@ -25,7 +25,7 @@ class LibraryCategoriesController < OrganizationAwareController
     # Check to see if we got an organization to sub select on.
     @org_filter = params[:org_filter]
 
-    conditions << 'organization_id IN (?)'
+    conditions << 'library_categories.organization_id IN (?)'
     if @org_filter.blank?
       values << @organization_list
     else
@@ -34,14 +34,16 @@ class LibraryCategoriesController < OrganizationAwareController
 
     @library_category_id = params[:library_category_id]
     unless @library_category_id.blank?
-      conditions << 'id = ?'
+      conditions << 'library_categories.id = ?'
       values << @library_category_id
     end
 
     @search_text = params[:search_text]
     unless @search_text.blank?
-      conditions << '(name LIKE ? OR description LIKE ?)'
-      query_str = @search_text + '%'
+      conditions << '(library_categories.name LIKE ? OR library_categories.description LIKE ? OR library_documents.name LIKE ? OR library_documents.description LIKE ?)'
+      query_str = '%' + @search_text + '%'
+      values << query_str
+      values << query_str
       values << query_str
       values << query_str
     end
@@ -49,8 +51,7 @@ class LibraryCategoriesController < OrganizationAwareController
     #puts conditions.inspect
     #puts values.inspect
 
-    # Get the initial list of capital projects. These might need to be filtered further if the user specified a funding source filter
-    @categories = LibraryCategory.where(conditions.join(' AND '), *values).order(:name)
+    @categories = LibraryCategory.includes(:library_documents).where(conditions.join(' AND '), *values).references(:library_documents).order(:name)
 
     # cache the set of object keys in case we need them later
     cache_list(@categories, INDEX_KEY_LIST_VAR)
