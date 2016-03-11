@@ -8,9 +8,6 @@ class LibraryDocumentsController < OrganizationAwareController
   before_action :set_category
   before_action :set_document, :only => [:show, :edit, :update, :destroy, :download]
 
-  def index
-    @documents = @category.library_documents
-  end
 
   def show
     add_breadcrumb @document.name, library_category_library_document_path(@category, @document)

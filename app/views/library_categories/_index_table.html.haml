@@ -5,10 +5,14 @@
 
 .row{:style => 'margin-top: 50px;'}
   - categories.each do |category|
+
     .col-sm-12.document-row
       %fieldset
-        %legend= category
+        %legend
+          = link_to category, library_category_path(category)
+          = render :partial => 'library_categories/actions', :locals => {:category => category}
         = render :partial => 'category_documents', :locals => {:category => category}
+
 
 :javascript
 
