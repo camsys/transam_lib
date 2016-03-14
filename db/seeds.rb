@@ -8,7 +8,7 @@ is_sqlite =  (ActiveRecord::Base.configurations[Rails.env]['adapter'] == 'sqlite
 #
 # Lookup Tables
 #
-# These are the lookup tables for TransAM NTD
+# These are the lookup tables for TransAM Lib
 #
 #------------------------------------------------------------------------------
 
