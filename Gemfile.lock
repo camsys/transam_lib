@@ -24,7 +24,7 @@ GIT
 PATH
   remote: .
   specs:
-    transam_lib (0.0.0)
+    transam_lib (0.0.3)
       rails (>= 4.1.9)
 
 GEM

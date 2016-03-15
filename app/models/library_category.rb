@@ -40,6 +40,7 @@ class LibraryCategory < ActiveRecord::Base
     :organization_id,
     :name,
     :description,
+    :public,
     :active
   ]
 
@@ -62,6 +63,10 @@ class LibraryCategory < ActiveRecord::Base
     library_documents.empty?
   end
 
+  def is_public?
+    (public)
+  end
+
   #-----------------------------------------------------------------------------
   # Protected Methods
   #-----------------------------------------------------------------------------
@@ -69,7 +74,8 @@ class LibraryCategory < ActiveRecord::Base
 
   # Set resonable defaults for a new library category
   def set_defaults
-
+    self.active = self.active.nil? ? true : self.active
+    self.public = self.public.nil? ? false : self.public
   end
 
 end

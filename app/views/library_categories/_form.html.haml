@@ -3,10 +3,12 @@
   :wrapper => :vertical_form,
   :wrapper_mappings => {:check_boxes => :vertical_radio_and_checkboxes, :radio_buttons => :vertical_radio_and_checkboxes, :file => :vertical_file_input, :boolean => :vertical_boolean}) do |f|
 
-  - if @organization_list.count > 1
-    = f.association :organization, :collection => Organization.where(id: @organization_list), :label_method => 'coded_name', :required => true
+  - if current_user.organizations.count > 1
+    = f.association :organization, :collection => current_user.organizations, :label_method => 'coded_name', :required => true
   = f.input :name, :required => true
   = f.input :description, :required => true
+  - if current_user.has_role? :manager
+    = f.input :public, :collection => [['No', false],['Yes', true]], :include_blank => false
   = f.input :active, :collection => [['No', false],['Yes', true]], :include_blank => false
 
   = f.button :submit, :class => "btn btn-primary"

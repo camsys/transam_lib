@@ -25,7 +25,8 @@ class LibraryCategoriesController < OrganizationAwareController
     # Check to see if we got an organization to sub select on.
     @org_filter = params[:org_filter]
 
-    conditions << 'library_categories.organization_id IN (?)'
+    # ignore organization list and get all public categories as well
+    conditions << '(public = 1 OR library_categories.organization_id IN (?))'
     if @org_filter.blank?
       values << @organization_list
     else
