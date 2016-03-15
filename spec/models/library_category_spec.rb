@@ -33,6 +33,7 @@ RSpec.describe LibraryCategory, :type => :model do
       :organization_id,
       :name,
       :description,
+      :public,
       :active
     ])
   end
