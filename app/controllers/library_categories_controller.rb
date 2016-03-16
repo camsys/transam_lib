@@ -52,7 +52,7 @@ class LibraryCategoriesController < OrganizationAwareController
     #puts conditions.inspect
     #puts values.inspect
 
-    @categories = LibraryCategory.includes(:library_documents).where(conditions.join(' AND '), *values).references(:library_documents).order(:name)
+    @categories = LibraryCategory.includes(:library_documents).where(conditions.join(' AND '), *values).references(:library_documents).order("public desc", :name)
 
     # cache the set of object keys in case we need them later
     cache_list(@categories, INDEX_KEY_LIST_VAR)
