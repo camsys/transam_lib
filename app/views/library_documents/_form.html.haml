@@ -9,7 +9,7 @@
     = f.input :description, :as => :text, :required => true, :input_html => { :rows => 3 }, :placeholder => 'Enter a brief description of the document...'
 
     - if @document.new_record?
-      = f.input :file, :required => true, :title => @document.file? ? @document.original_filename : nil, :input_html => { :extension => "pdf,xls,xlsx,doc,docx,ppt" }
+      = f.input :file, :required => true, :title => @document.file? ? @document.original_filename : nil, :input_html => { :extension => @document.file.extension_white_list.join(',') }
     -else
       = dialog_tag("File", {:icon => "fa fa-info-circle", :class => "form_part"}) do
         %p= @document.original_filename
