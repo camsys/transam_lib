@@ -35,7 +35,7 @@ RSpec.describe LibraryCategoriesController, :type => :controller do
 
   it 'POST create' do
     LibraryCategory.destroy_all
-    post :create, :library_category => attributes_for(:library_category, :organization => nil)
+    post :create, :library_category => attributes_for(:library_category, :organization_id => subject.current_user.organization.id)
 
     expect(LibraryCategory.count).to eq(1)
     expect(LibraryCategory.first.organization).to eq(subject.current_user.organization)
