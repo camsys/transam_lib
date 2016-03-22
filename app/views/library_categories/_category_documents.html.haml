@@ -22,7 +22,7 @@
           %td.left= format_as_text(doc.description)
           %td.right.nowrap= format_as_date(doc.updated_at)
           %td.right
-            -if (current_user.has_role? :manager) || current_user.organizations[0] == category.organization
+            -if (can? :update, category) or (can? :destroy, category)
               - if can? :read, doc
                 = link_to download_library_category_library_document_path(category, doc), :class => "btn btn-primary btn-xs", :style => "margin-left: 5px;" do
                   %i.fa.fa-download

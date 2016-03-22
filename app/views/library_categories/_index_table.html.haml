@@ -16,14 +16,6 @@
             - else
               %i.fa.fa-folder.fa-fw
               = category.name
-
-          -#-if category.public
-          -#  = link_to category, library_category_path(category)  do
-          -#    %i.fa.fa-folder-open.fa-fw
-          -#-else
-          -#  = link_to category, library_category_path(category) do
-          -#    %i.fa.fa-folder.fa-fw
-
           = render :partial => 'library_categories/actions', :locals => {:category => category}
         = render :partial => 'category_documents', :locals => {:category => category}
 

@@ -1,4 +1,4 @@
-- if ( (can? :update, category) or (can? :destroy, category) ) && ( (current_user.has_role? :manager) || current_user.organizations[0] == category.organization)
+- if ( (can? :update, category) or (can? :destroy, category) )
   .btn-group.pull-right.panel-action
     %button.btn.btn-primary.btn-sm.dropdown-toggle{:data => {:toggle => 'dropdown'}}
       %i.fa.fa-cog

@@ -29,7 +29,8 @@ class LibraryCategory < ActiveRecord::Base
   validates :name,                  :presence => true
   validates :description,           :presence => true
   #If this is public is cannot explicitly belong to an organization so it will be null otherwise it should be something.
-  #validates :organization_id,       :presence => true, unless: :public
+  validates :organization_id,       :presence => true,
+            unless: Proc.new { :public }
 
 
   #------------------------------------------------------------------------------
