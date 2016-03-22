@@ -9,7 +9,13 @@
     .col-sm-12.document-row
       %fieldset
         %legend
-          = link_to category, library_category_path(category)
+          = link_to library_category_path(category), {:title => category.public ? "Public" : "Private"} do
+            - if category.public
+              %i.fa.fa-folder-open.fa-fw
+              = category.name
+            - else
+              %i.fa.fa-folder.fa-fw
+              = category.name
           = render :partial => 'library_categories/actions', :locals => {:category => category}
         = render :partial => 'category_documents', :locals => {:category => category}
 

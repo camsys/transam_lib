@@ -19,8 +19,7 @@ class LibraryCategory < ActiveRecord::Base
   # Associations
   #-----------------------------------------------------------------------------
   # Every category belongs to an organization
-  belongs_to  :organization
-
+  belongs_to :organization
   # Every category has 0 or more documents
   has_many    :library_documents, :dependent => :destroy
 
@@ -29,7 +28,10 @@ class LibraryCategory < ActiveRecord::Base
   #------------------------------------------------------------------------------
   validates :name,                  :presence => true
   validates :description,           :presence => true
-  validates :organization_id,       :presence => true
+  #If this is public is cannot explicitly belong to an organization so it will be null otherwise it should be something.
+  validates :organization_id,       :presence => true,
+            unless: Proc.new { :public }
+
 
   #------------------------------------------------------------------------------
   # Scopes

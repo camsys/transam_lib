@@ -1,14 +1,14 @@
 :ruby
-  library = LibraryCategory.active.where(organization: @organization_list).order(:name)
+  library = LibraryCategory.active.where("public=1 OR organization_id IN (?)", @organization_list ).order("public DESC", :name)
 
 %li.dropdown{:class => get_nav_link_class(['library'])}
   = link_to "#", :class => "dropdown-toggle", :data => {"toggle" => "dropdown"} do
-    %i.fa.fa-book.fa-2x
+    %i.fa.fa-folder.fa-2x
     %b.caret
   %ul.dropdown-menu
     %li.text-left
       = link_to library_categories_path do
-        %i.fa.fa-book.fa-fw
+        %i.fa.fa-folder.fa-fw
         = " Document Library"
 
     - if library.present?
@@ -16,5 +16,9 @@
       - library.each do |category|
         %li
           = link_to library_category_path(category) do
-            %i.fa.fa-book.fa-fw
-            = category.name
+            - if category.public
+              %i.fa.fa-folder-open.fa-fw
+              = category.name
+            - else
+              %i.fa.fa-folder.fa-fw
+              = category.name
