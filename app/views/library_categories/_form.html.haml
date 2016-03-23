@@ -3,14 +3,14 @@
   :wrapper => :vertical_form,
   :wrapper_mappings => {:check_boxes => :vertical_radio_and_checkboxes, :radio_buttons => :vertical_radio_and_checkboxes, :file => :vertical_file_input, :boolean => :vertical_boolean}) do |f|
 
+  - if current_user.has_role? :manager
+    = f.input :public, :collection => [['No', false],['Yes', true]], :include_blank => false
   - if current_user.organizations.count > 1
     = f.association :organization, :collection => current_user.organizations, :label_method => 'coded_name', :required => true, :prompt => ''
     <select class="select form-control" id="library_category_organization_all" name="library_category_organization_all" disabled=true style="display: none"><option value="">ALL</option></select>
 
   = f.input :name, :required => true
   = f.input :description, :required => true
-  - if current_user.has_role? :manager
-    = f.input :public, :collection => [['No', false],['Yes', true]], :include_blank => false
   = f.input :active, :collection => [['No', false],['Yes', true]], :include_blank => false
 
   = f.button :submit, :class => "btn btn-primary"
@@ -25,7 +25,7 @@
       library_category_organization_all.style.display = "block"
     }else
     {
-      library_category_organization_id.disabled = true;
+      library_category_organization_id.disabled = false;
       library_category_organization_id.style.display = "block";
       library_category_organization_all.style.display = "none"
     }
