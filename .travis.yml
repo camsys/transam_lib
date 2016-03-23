@@ -11,5 +11,3 @@ script:
 - bundle exec rspec
 before_install:
 - mysql -e "create database IF NOT EXISTS transam_lib_testing;" -uroot
-- openssl aes-256-cbc -K $encrypted_85c5363f62c5_key -iv $encrypted_85c5363f62c5_iv
-  -in spec/dummy/db/schema.rb.enc -out spec/dummy/db/schema.rb -d
