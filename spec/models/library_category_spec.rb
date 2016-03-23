@@ -21,11 +21,6 @@ RSpec.describe LibraryCategory, :type => :model do
 
       expect(test_category.valid?).to be false
     end
-    it 'must have an org' do
-      test_category.organization = nil
-
-      expect(test_category.valid?).to be false
-    end
   end
 
   it '#allowable_params' do
