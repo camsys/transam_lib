@@ -14,6 +14,14 @@
   = f.button :submit, :class => "btn btn-primary"
 
 :javascript
+
+  if(library_category_public.value == 'true') {
+    library_category_organization_id.value = '';
+    $('.library_category_organization').hide();
+  } else {
+    $('.library_category_organization').show();
+  }
+
   $( '.library_category_public').change(function() {
     if(library_category_public.value == 'true') {
       library_category_organization_id.value = '';
