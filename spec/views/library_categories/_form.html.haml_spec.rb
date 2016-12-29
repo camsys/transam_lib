@@ -8,6 +8,7 @@ describe "library_categories/_form.html.haml", :type => :view do
     test_manager.save!
     allow(controller).to receive(:current_user).and_return(test_manager)
     assign(:category, create(:library_category))
+    assign(:organization_list, [1,2])
     render
 
     expect(rendered).to have_field('library_category_organization_id')
