@@ -112,7 +112,7 @@ class LibraryCategoriesController < OrganizationAwareController
 
     @category = LibraryCategory.new(form_params)
     if @category.organization.nil? && !@category.public
-      @category.organization = @organization
+      @category.organization_id = @organization_list.first
     end
 
     respond_to do |format|
