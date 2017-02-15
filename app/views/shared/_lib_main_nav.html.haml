@@ -5,20 +5,18 @@
   = link_to "#", :class => "dropdown-toggle", :data => {"toggle" => "dropdown"}, :title => 'Document Library' do
     %i.fa.fa-folder.fa-2x
     %b.caret
-  %ul.dropdown-menu
+  %ul.dropdown-menu.columns-2
     %li.text-left
-      = link_to library_categories_path do
+      = link_to library_categories_path, :style => 'font-weight:bold;' do
         %i.fa.fa-folder.fa-fw
         = " Document Library"
 
-    - if library.present?
-      %li.divider
-      - library.each do |category|
-        %li
-          = link_to library_category_path(category) do
-            - if category.public
-              %i.fa.fa-folder-open.fa-fw
-              = category.name
-            - else
-              %i.fa.fa-folder.fa-fw
-              = category.name
+    - library.each do |category|
+      %li.text-left
+        = link_to library_category_path(category) do
+          - if category.public
+            %i.fa.fa-folder-open.fa-fw
+            = category.name
+          - else
+            %i.fa.fa-folder.fa-fw
+            = category.name
