@@ -37,6 +37,6 @@
                   Delete
             -else
               - if can? :read, doc
-                = link_to download_library_category_library_document_path(category, doc), :class => "btn btn-primary btn-xs", :style => "margin-left: 5px;" do
+                = link_to download_library_category_library_document_path(category, doc), :class => "btn btn-primary btn-xs btn-action" do
                   %i.fa.fa-download
                   Download
