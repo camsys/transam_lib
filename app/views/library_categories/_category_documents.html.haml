@@ -24,15 +24,15 @@
           %td.right
             -if (can? :update, category) or (can? :destroy, category)
               - if can? :read, doc
-                = link_to download_library_category_library_document_path(category, doc), :class => "btn btn-primary btn-xs", :style => "margin-left: 5px;" do
+                = link_to download_library_category_library_document_path(category, doc), :class => "btn btn-primary btn-xs btn-action" do
                   %i.fa.fa-download
                   Download
               - if can? :update, doc
-                = link_to edit_library_category_library_document_path(category, doc), :class => "btn btn-success btn-xs", :style => "margin-left: 5px;" do
+                = link_to edit_library_category_library_document_path(category, doc), :class => "btn btn-success btn-xs btn-action" do
                   %i.fa.fa-edit
                   Edit
               - if can? :destroy, doc
-                = link_to library_category_library_document_path(category, doc), :method => :delete, :class => "btn btn-warning btn-xs", :style => "margin-left: 5px;", :data => { :confirm => 'Are you sure you want to remove this document?' } do
+                = link_to library_category_library_document_path(category, doc), :method => :delete, :class => "btn btn-warning btn-xs btn-action", :data => { :confirm => 'Are you sure you want to remove this document?' } do
                   %i.fa.fa-trash
                   Delete
             -else
