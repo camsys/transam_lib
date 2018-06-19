@@ -10,27 +10,27 @@ RSpec.describe LibraryDocumentsController, :type => :controller do
   end
 
   it 'GET show' do
-    get :show, :library_category_id => test_category.object_key, :id => test_doc.object_key
+    get :show, params: {:library_category_id => test_category.object_key, :id => test_doc.object_key}
 
     expect(assigns(:category)).to eq(test_category)
     expect(assigns(:document)).to eq(test_doc)
   end
 
   it 'GET new' do
-    get :new, :library_category_id => test_category.object_key
+    get :new, params: {:library_category_id => test_category.object_key}
 
     expect(assigns(:category)).to eq(test_category)
     expect(assigns(:document).to_json).to eq(LibraryDocument.new.to_json)
   end
   it 'GET edit' do
-    get :edit, :library_category_id => test_category.object_key, :id => test_doc.object_key
+    get :edit, params: {:library_category_id => test_category.object_key, :id => test_doc.object_key}
 
     expect(assigns(:category)).to eq(test_category)
     expect(assigns(:document)).to eq(test_doc)
   end
 
   it 'POST create' do
-    post :create, :library_category_id => test_category.object_key, :library_document => attributes_for(:library_document, :description => 'new description 222')
+    post :create, params: {:library_category_id => test_category.object_key, :library_document => attributes_for(:library_document, :description => 'new description 222')}
     test_category.reload
 
     expect(assigns(:category)).to eq(test_category)
@@ -38,7 +38,7 @@ RSpec.describe LibraryDocumentsController, :type => :controller do
     expect(test_category.library_documents.first.description).to eq('new description 222')
   end
   it 'PUT update' do
-    put :update, :library_category_id => test_category.object_key, :id => test_doc.object_key, :library_document => {:description => 'new description 222'}
+    put :update, params: {:library_category_id => test_category.object_key, :id => test_doc.object_key, :library_document => {:description => 'new description 222'}}
     test_doc.reload
 
     expect(assigns(:category)).to eq(test_category)
@@ -48,7 +48,7 @@ RSpec.describe LibraryDocumentsController, :type => :controller do
 
   it 'DELETE destroy' do
     request.env["HTTP_REFERER"] = root_path
-    delete :destroy, :library_category_id => test_category.object_key, :id => test_doc.object_key
+    delete :destroy, params: {:library_category_id => test_category.object_key, :id => test_doc.object_key}
 
     expect(assigns(:category)).to eq(test_category)
     expect(LibraryDocument.find_by(:object_key => test_doc.object_key)).to be nil
