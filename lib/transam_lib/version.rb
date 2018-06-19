@@ -1,3 +1,3 @@
 module TransamLib
-  VERSION = "0.0.10"
+  VERSION = "2.2.0"
 end
