@@ -16,3 +16,5 @@ gem 'transam_core', git: 'https://github.com/camsys/transam_core', branch: :mast
 gem "capybara", '2.6.2' # lock gem for old capybara behavior on hidden element xpath
 
 gem 'rails-controller-testing'
+
+gem 'active_record-acts_as', git: 'https://github.com/camsys/active_record-acts_as', branch: 'master' # use our fork
