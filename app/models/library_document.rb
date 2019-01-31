@@ -30,7 +30,7 @@ class LibraryDocument < ActiveRecord::Base
   # Every document must belong to a category
   belongs_to :library_category
 
-  belongs_to :creator, :class_name => "User", :foreign_key => "created_by_id"
+  belongs_to :creator, -> { unscope(where: :active) }, :class_name => "User", :foreign_key => "created_by_id"
 
   # Has 0 or more comments. Using a polymorphic association, These will be removed if the project is removed
   has_many    :comments,    :as => :commentable,  :dependent => :destroy
