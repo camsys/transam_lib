@@ -46,8 +46,9 @@ class LibraryDocument < ActiveRecord::Base
   #------------------------------------------------------------------------------
   validates :name,                  :presence => true
   validates :description,           :presence => true
+  validates :library_category_id,   :presence => true
   validates :organization_id,       :presence => true,
-            unless: Proc.new { |l| l.library_category.public } # public libraryr categories don't have an organization id and neither do their docs.
+            unless: Proc.new { |l| l.library_category.present? && l.library_category.public } # public libraryr categories don't have an organization id and neither do their docs.
   validates :creator,               :presence => true
   validates :file,                  :presence => true, :file_size => { :maximum => MAX_UPLOAD_FILE_SIZE.megabytes.to_i }
   validates :original_filename,     :presence => true
