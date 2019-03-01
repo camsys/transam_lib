@@ -35,7 +35,6 @@ RSpec.describe LibraryDocument, :type => :model do
     end
     it 'must have a file' do
       test_doc = build_stubbed(:library_document, :file => nil)
-      expect(test_doc.valid?).to be false
 
       expect(test_doc.valid?).to be false
     end
