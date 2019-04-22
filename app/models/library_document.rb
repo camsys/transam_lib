@@ -99,7 +99,7 @@ class LibraryDocument < ActiveRecord::Base
 
   def update_file_attributes
 
-    if file.present? && file_changed?
+    if file.present? && saved_change_to_attribute?(:file)
       self.content_type = file.file.content_type
       self.file_size = file.file.size
     end
