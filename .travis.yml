@@ -14,3 +14,4 @@ script:
 - bundle exec rspec
 before_install:
 - mysql -e "create database IF NOT EXISTS transam_lib_testing;" -uroot
+- gem install -v 2.3.4 bundler --document=
